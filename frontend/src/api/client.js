@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api/v1';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://selfpublish-studio12.onrender.com/api/v1';
 
 async function request(url, options = {}) {
     const headers = options.body instanceof FormData
@@ -12,7 +12,7 @@ async function request(url, options = {}) {
             ...options
         });
     } catch {
-        throw new Error('Could not reach the backend. Make sure the API is running on http://localhost:3001.');
+        throw new Error('Could not reach the backend. Make sure the API is running on https://selfpublish-studio12.onrender.com.');
     }
 
     if (!res.ok) {

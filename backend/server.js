@@ -8,7 +8,7 @@ const quoteRequestsRouter = require('./routes/quoteRequests');
 const app = express();
 const PORT = process.env.PORT || 3001;
 const allowedOrigins = new Set([
-    process.env.FRONTEND_URL || 'http://localhost:5173',
+    process.env.FRONTEND_URL || 'self-publish-studio12-lzvp.vercel.app',
     'http://localhost:5173',
     'http://127.0.0.1:5173',
     'http://[::1]:5173'
