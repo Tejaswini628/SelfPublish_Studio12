@@ -1,4 +1,12 @@
-const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://selfpublish-studio12.onrender.com/api/v1';
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || 'https://selfpublish-studio12.onrender.com/api/v1').replace(/\/+$/, '');
+
+function getApiOrigin() {
+    try {
+        return new URL(API_BASE).origin;
+    } catch {
+        return API_BASE;
+    }
+}
 
 async function request(url, options = {}) {
     const headers = options.body instanceof FormData
@@ -12,7 +20,7 @@ async function request(url, options = {}) {
             ...options
         });
     } catch {
-        throw new Error('Could not reach the backend. Make sure the API is running on https://selfpublish-studio12.onrender.com.');
+        throw new Error(`Could not reach the backend. Make sure the API is running on ${getApiOrigin()}.`);
     }
 
     if (!res.ok) {

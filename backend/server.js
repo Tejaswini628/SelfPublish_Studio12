@@ -7,8 +7,36 @@ const quoteRequestsRouter = require('./routes/quoteRequests');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+function normalizeOrigin(value) {
+    if (!value) {
+        return null;
+    }
+
+    const trimmed = value.trim();
+    if (!trimmed) {
+        return null;
+    }
+
+    try {
+        return new URL(trimmed).origin;
+    } catch {
+        try {
+            return new URL(`https://${trimmed}`).origin;
+        } catch {
+            return trimmed;
+        }
+    }
+}
+
+const configuredOrigins = (process.env.FRONTEND_URL || '')
+    .split(',')
+    .map(normalizeOrigin)
+    .filter(Boolean);
+
 const allowedOrigins = new Set([
-    process.env.FRONTEND_URL || 'self-publish-studio12-lzvp.vercel.app',
+    ...configuredOrigins,
+    'https://self-publish-studio12-lzvp.vercel.app',
     'http://localhost:5173',
     'http://127.0.0.1:5173',
     'http://[::1]:5173'
