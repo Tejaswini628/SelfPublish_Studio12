@@ -63,6 +63,7 @@ router.post('/', async (req, res, next) => {
                 createdAt: localRecord.created_at,
                 storedIn: 'local',
                 email: emailResult.sent ? 'sent' : 'not_sent',
+                emailReason: emailResult.sent ? null : emailResult.reason,
                 recipient: QUOTE_RECIPIENT,
                 message: 'Quote request received.'
             });
@@ -74,6 +75,7 @@ router.post('/', async (req, res, next) => {
             createdAt: data.created_at,
             storedIn: 'supabase',
             email: emailResult.sent ? 'sent' : 'not_sent',
+            emailReason: emailResult.sent ? null : emailResult.reason,
             recipient: QUOTE_RECIPIENT,
             message: 'Quote request received.'
         });

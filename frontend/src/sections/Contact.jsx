@@ -31,7 +31,7 @@ export default function Contact() {
                 type: wasEmailed ? 'success' : 'warning',
                 message: wasEmailed
                     ? `Your quote request was sent to ${result.recipient}.`
-                    : `Your quote request was saved, but email sending is not configured yet.`
+                    : `Your quote request was saved, but email could not be sent: ${result.emailReason || 'Check the backend email settings.'}`
             });
             form.reset();
         } catch (error) {
